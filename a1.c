@@ -10,21 +10,17 @@ void toLowerCase(char *str) {
     }
 }
 
-char removePunctuation(char c){
-  if( c < 'z' || c > 'a'){
-    return c;
-  }
-}
+// char removePunctuation(char c){
+//   if( c < 'z' || c > 'a'){
+//     return c;
+//   }
+// }
 
 int checkAnagram(char str[], char str2[]) {
     int length1 = strlen(str);
-    int length2 = strlen(str);
-
-    printf("%d\n", length1);
-    printf("%d\n", length2);
+    int length2 = strlen(str2);
 
     if (length1 != length2) {
-        printf("0! not anagram\n");
         return 0;
     }
 
@@ -39,15 +35,22 @@ int checkAnagram(char str[], char str2[]) {
     }
 
     for (int i = 0; i < 256; i++) {
-      printf("%d", counter[i]);
       if (counter[i] != 0) {
-          printf("0! not anagram\n");
           return 0;
       }
     }
 
-    printf("1! anagram\n");
+    
     return 1;
+}
+
+void removeLastCharacter(char *str) {
+    if (str == NULL || *str == '\0')
+        return;
+
+    int len = strlen(str);
+    if (len > 0)
+        str[len - 1] = '\0';
 }
 
 int main(int argc, char *argv[]) {
@@ -82,7 +85,13 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  checkAnagram(line1, line2);
+  removeLastCharacter(line1);
+
+  if (checkAnagram(line1, line2) == 1) {
+    fprintf(output_file, "1! anagram\n");
+  } else {
+    fprintf(output_file, "0! not anagram\n");
+  }
 
   fclose(input_file);
   fclose(output_file);

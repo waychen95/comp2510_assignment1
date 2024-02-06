@@ -10,42 +10,87 @@ void toLowerCase(char *str) {
     }
 }
 
-void removePunctuationsAndSpaces(char *str) {
-    int j = 0;
-    for (int i = 0; str[i]; i++) {
-        if (isalpha(str[i])) {
-            str[j++] = str[i];
-        }
-    }
-    str[j] = '\0';
+char removePunctuation(char c){
+  if( c < 'z' || c > 'a'){
+    return c;
+  }
+  else {
+    return 0;
+  }
 }
 
 int checkAnagram(char str[], char str2[]) {
-    int length1 = strlen(str);
-    int length2 = strlen(str2);
 
-    if (length1 != length2) {
+  toLowerCase(str);
+  toLowerCase(str2);
+
+  int length1 = strlen(str);
+  int length2 = strlen(str2);
+
+  // replace all of the non letters with null
+ 
+  for(int i = 0; i < length1; i++){
+    str[i] = removePunctuation(str[i]);
+
+  }
+  for(int i = 0; i < length2; i++){
+    str2[i] = removePunctuation(str2[i]);
+  }
+  // make length equal to the length of the string - the null characters
+  int newlength1 = 0;
+  for(int i = 0; i < length1; i++){
+    if(str[i] != 0){
+      newlength1++; 
+    }
+  }
+  int newlength2 = 0;
+  for(int i = 0; i < length2; i++){
+    if(str2[i] != 0){
+      newlength2++; 
+    }
+  }
+  // make a new string that is the old string without the nulls
+  char newStr1[length1];
+  char newStr2[length2];
+
+  for(int i = 0; i < length1; i++){
+    if(str[i] != 0){
+      newStr1[i] = str[i];
+    }
+  }
+  for(int i = 0; i < length2; i++){
+    if(str2[i] != 0){
+      newStr2[i] = str[i];
+    }
+  }
+
+  printf("%s", newStr1);
+
+  int lengthNew1 = strlen(newStr1);
+  int lengthNew2 = strlen(newStr2);
+
+
+  if (lengthNew1 != lengthNew2) {
+      return 0;
+  }
+
+  printf("%s\n", newStr1);
+  printf("%s\n", newStr2);
+
+  int counter[256] = {0};
+
+  for (int i = 0; i < length1; i++) {
+      counter[(int)newStr1[i]]++;
+      counter[(int)newStr2[i]]--;
+  }
+
+  for (int i = 0; i < 256; i++) {
+    if (counter[i] != 0) {
         return 0;
     }
+  }
 
-    toLowerCase(str);
-    toLowerCase(str2);
-
-    int counter[256] = {0};
-
-    for (int i = 0; i < length1; i++) {
-        counter[(int)str[i]]++;
-        counter[(int)str2[i]]--;
-    }
-
-    for (int i = 0; i < 256; i++) {
-      if (counter[i] != 0) {
-          return 0;
-      }
-    }
-
-    
-    return 1;
+  return 1;
 }
 
 void removeLastCharacter(char *str) {
@@ -90,8 +135,6 @@ int main(int argc, char *argv[]) {
   }
 
   removeLastCharacter(line1);
-  removePunctuationsAndSpaces(line1);
-  removePunctuationsAndSpaces(line2);
 
   if (checkAnagram(line1, line2) == 1) {
     fprintf(output_file, "1! anagram\n");

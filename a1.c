@@ -24,8 +24,8 @@ int checkAnagram(char str[], char str2[]) {
     printf("%d\n", length2);
 
     if (length1 != length2) {
-        printf("0! not anagram\n"); // Add newline character in the print statement
-        return 0; // Return indicating not an anagram
+        printf("0! not anagram\n");
+        return 0;
     }
 
     toLowerCase(str);
@@ -47,7 +47,7 @@ int checkAnagram(char str[], char str2[]) {
     }
 
     printf("1! anagram\n");
-    return 1; // Return indicating an anagram
+    return 1;
 }
 
 int main(int argc, char *argv[]) {

@@ -2,14 +2,29 @@
 #include <stdlib.h>
 #include <string.h>
 
+char removePunctuation(char c){
+  if( c < 'z' || c > 'a'){
+    return c;
+  }
+
+
+}
+
 int checkAnagram(char str[], char str2[]) {
+
+
   toSmallCase(str);
   toSmallCase(str2);
+
+
 
   int length1 = strlen(str);
   int length2 = strlen(str2);
 
-
+  // char newStr[length1];
+  // for(int i = 0; i < length; i++){
+  //   newStr[i] = removePunctuation(str[i])
+  // }
 
   for (int i = 0; i < length1; i++) {
     for (int j = 0; j < length2; j++) {
@@ -21,7 +36,7 @@ int checkAnagram(char str[], char str2[]) {
 }
 
 void toSmallCase(char *str) {
-  int length = strlen(str);
+ int length = strlen(str);
 
   for (int i = 0; i < length; i++) {
     str[i] = toLower(str[i]);

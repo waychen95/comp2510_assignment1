@@ -14,6 +14,9 @@ char removePunctuation(char c){
   if( c < 'z' || c > 'a'){
     return c;
   }
+  else {
+    return 0;
+  }
 }
 
 int checkAnagram(char str[], char str2[]) {
@@ -31,11 +34,51 @@ int checkAnagram(char str[], char str2[]) {
     toLowerCase(str);
     toLowerCase(str2);
 
+
+// replace all of the non letters with null
+    for(int i = 0; i < length1; i++){
+      str[i] = removePunctuation(str[i]);
+    }
+    for(int i = 0; i < length2; i++){
+      str2[i] = removePunctuation(str2[i]);
+    }
+// make length equal to the length of the string - the null characters
+  length1 = 0;
+  for(int i = 0; i < length1; i++){
+    if(str[i] != 0){
+      length1++; 
+    }
+  }
+  length2 = 0;
+  for(int i = 0; i < length2; i++){
+    if(str2[i] != 0){
+      length2++; 
+    }
+  }
+  // make a new string that is the old string without the nulls
+  char newStr1[length1];
+  char newStr2[length2];
+    
+  for(int i = 0; i < length1; i++){
+    if(str[i] != 0){
+      newStr1[i] = str[i];
+    }
+  }
+  for(int i = 0; i < length2; i++){
+    if(str2[i] != 0){
+      newStr2[i] = str[i];
+    }
+  }
+
+
+
+
+
     int counter[256] = {0};
 
     for (int i = 0; i < length1; i++) {
-        counter[(int)str[i]]++;
-        counter[(int)str2[i]]--;
+        counter[(int)newStr1[i]]++;
+        counter[(int)newStr2[i]]--;
     }
 
     for (int i = 0; i < 256; i++) {

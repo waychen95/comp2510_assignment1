@@ -10,9 +10,15 @@ void toLowerCase(char *str) {
     }
 }
 
+char removePunctuation(char c){
+  if( c < 'z' || c > 'a'){
+    return c;
+  }
+}
+
 int checkAnagram(char str[], char str2[]) {
     int length1 = strlen(str);
-    int length2 = strlen(str2);
+    int length2 = strlen(str);
 
     printf("%d\n", length1);
     printf("%d\n", length2);
@@ -25,21 +31,22 @@ int checkAnagram(char str[], char str2[]) {
     toLowerCase(str);
     toLowerCase(str2);
 
-    int counter[256] = {0}; // Initialize counter array
+    int counter[256] = {0};
 
     for (int i = 0; i < length1; i++) {
         counter[(int)str[i]]++;
-        counter[(int)str2[i]]--; // Fix this line, it should be str2[i]
+        counter[(int)str2[i]]--;
     }
 
-    for (int i = 0; i < 256; i++) { // Iterate over all possible ASCII characters
-        if (counter[i] != 0) {
-            printf("0! not anagram\n"); // Add newline character in the print statement
-            return 0; // Return indicating not an anagram
-        }
+    for (int i = 0; i < 256; i++) {
+      printf("%d", counter[i]);
+      if (counter[i] != 0) {
+          printf("0! not anagram\n");
+          return 0;
+      }
     }
 
-    printf("1! anagram\n"); // Add newline character in the print statement
+    printf("1! anagram\n");
     return 1; // Return indicating an anagram
 }
 

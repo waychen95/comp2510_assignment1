@@ -63,8 +63,8 @@ int main(int argc, char *argv[]) {
       return 1;
   }
 
-  char line1[100];
-  char line2[100];
+  char line1[256];
+  char line2[256];
 
   const char *input_path = argv[1];
   const char *output_path = argv[2];
@@ -94,9 +94,9 @@ int main(int argc, char *argv[]) {
   removePunctuationsAndSpaces(line2);
 
   if (checkAnagram(line1, line2) == 1) {
-    fprintf(output_file, "1! anagram\n");
+    fprintf(output_file, "1! anagram");
   } else {
-    fprintf(output_file, "0! not anagram\n");
+    fprintf(output_file, "0! not anagram");
   }
 
   fclose(input_file);

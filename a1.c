@@ -3,6 +3,10 @@
 #include <string.h>
 #include <ctype.h>
 
+//Wayne: A01026253
+//Clement: A01363591
+//Daniel: A01064479
+
 void toLowerCase(char *str) {
     int length = strlen(str);
     for (int i = 0; i < length; i++) {
@@ -43,8 +47,6 @@ int checkAnagram(char str[], char str2[]) {
           return 0;
       }
     }
-
-    
     return 1;
 }
 
@@ -73,18 +75,18 @@ int main(int argc, char *argv[]) {
   FILE *output_file = fopen(output_path, "w");
 
   if (input_file == NULL || output_file == NULL) {
-    fprintf(output_file, "Error opening files: input or output file is null\n");
+    fprintf(output_file, "error\n");
     return 1;
   }
 
   if (fgets(line1, sizeof(line1), input_file) == NULL) {
-    perror("Error reading first line");
+    fprintf(output_file, "error\n");
     fclose(input_file);
     return 1;
   }
 
   if (fgets(line2, sizeof(line2), input_file) == NULL) {
-    perror("Error reading second line");
+    fprintf(output_file, "error\n");
     fclose(input_file);
     return 1;
   }
